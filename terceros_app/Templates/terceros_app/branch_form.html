@@ -1,0 +1,24 @@
+<!-- terceros_app/templates/terceros_app/branch_form.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Agregar Sucursal para {{ third_party.business_name }}</title>
+</head>
+<body>
+    <h1>Agregar Sucursal para {{ third_party.business_name }}</h1>
+    <form method="post">
+        {% csrf_token %}
+        <p>{{ form.branch_number.label }}: {{ form.branch_number }}</p>
+        <p>{{ form.main_address.label }}: {{ form.main_address }}</p>
+        <p>{{ form.delivery_address.label }}: {{ form.delivery_address }}</p>
+        <p>{{ form.first_name_1.label }}: {{ form.first_name_1 }}</p>
+        <p>{{ form.first_name_2.label }}: {{ form.first_name_2 }}</p>
+        <p>{{ form.last_name_1.label }}: {{ form.last_name_1 }}</p>
+        <p>{{ form.last_name_2.label }}: {{ form.last_name_2 }}</p>
+        <p>{{ form.position.label }}: {{ form.position }}</p>
+        <p>{{ form.mobile_phone.label }}: {{ form.mobile_phone }}</p>
+        <p>{{ form.email.label }}: {{ form.email }}</p>
+        <button type="submit">Guardar Sucursal</button>
+    </form>
+</body>
+</html>

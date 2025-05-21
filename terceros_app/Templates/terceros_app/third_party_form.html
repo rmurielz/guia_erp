@@ -1,0 +1,53 @@
+<!-- terceros_app/templates/terceros_app/third_party_form.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Crear Tercero</title>
+    <script>
+        function loadCities() {
+            var countryId = document.getElementById('id_country').value;
+            var citySelect = document.getElementById('id_city');
+            citySelect.innerHTML = '<option value="">Seleccione una ciudad</option>';
+            if (countryId) {
+                fetch('/get_cities/?country_id=' + countryId)
+                    .then(response => response.json())
+                    .then(data => {
+                        data.forEach(city => {
+                            var option = document.createElement('option');
+                            option.value = city.id;
+                            option.text = city.name;
+                            citySelect.appendChild(option);
+                        });
+                    });
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Crear Tercero</h1>
+    <form method="post">
+        {% csrf_token %}
+        <h2>Información General</h2>
+        <p>{{ form.business_name.label }}: {{ form.business_name }}</p>
+        <p>{{ form.third_party_type.label }}: {{ form.third_party_type }}</p>
+        <p>{{ form.location.label }}: {{ form.location }}</p>
+        
+        <h2>Identificación</h2>
+        <p>{{ form.identification_type.label }}: {{ form.identification_type }}</p>
+        <p>{{ form.identification_number.label }}: {{ form.identification_number }}</p>
+        <p>{{ form.dv.label }}: {{ form.dv }}</p>
+        
+        <h2>Ubicación</h2>
+        <p>{{ form.address.label }}: {{ form.address }}</p>
+        <p>{{ form.country.label }}: {{ form.country }}</p>
+        <p>{{ form.city.label }}: {{ form.city }}</p>
+        
+        <button type="submit" name="save_and_add_branch">Guardar y Agregar Sucursal</button>
+        <button type="submit" name="save_only">Guardar</button>
+        
+    </form>
+    <script>
+        document.getElementById('id_country').addEventListener('change', loadCities);
+    </script>
+</body>
+</html>
